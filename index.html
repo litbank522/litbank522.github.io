@@ -13,7 +13,7 @@
     
     <!-- My CSS -->
     <link rel="stylesheet" href="style.css" />
-    <title>My Portfolio | Sutrisno</title>
+    <title>My Portfolio | Sutrisno</title>  
   </head>
   <body id="home">
     <!--Navbar -->
@@ -70,12 +70,11 @@
         <div class="row justify-content-center fs-5 text-center">
           <div class="col-md-4">
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur, voluptatibus nesciunt temporibus eaque saepe ullam voluptatem aut explicabo ex assumenda inventore! Vel, deserunt molestiae provident beatae error officia
-              maxime explicabo.
+              System Engineering pada sebuah Perusahaan yang bergerak dalam bidang teknologi komunikasi. 
             </p>
           </div>
           <div class="col-md-4">
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Blanditiis dolorem, omnis repudiandae debitis odit inventore hic maxime harum quas quo, molestiae ad assumenda animi et?</p>
+            <p>Saya juga seorang Dosen pada program studi informatika (S1) Universistas Pamulang.</p>
           </div>
         </div>
       </div>
@@ -102,7 +101,7 @@
             <div class="card">
               <img src="img/projects/4.jpg" class="card-img-top" alt="Project1" />
               <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <p class="card-text">Beberapa project pengembangan atau pengadaan Network yaitu PT.Pertamina Elnusa, PT Pertamina EP cabang Cirebon, Bekasi dan Kantor Pusat.</p>
               </div>
             </div>
           </div>
@@ -110,7 +109,7 @@
             <div class="card">
               <img src="img/projects/2.jpg" class="card-img-top" alt="Project2" />
               <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <p class="card-text">Pelaksanaan kewajiban Tri Dharma yaitu PkM Dosen yang dilakukan di SMK Informatika Ciputat dan SMK Bintang Nusantara, Untuk pembimbing PKM Mahasiswa diadakan di Toko Jaya Utama </p>
               </div>
             </div>
           </div>
@@ -118,7 +117,7 @@
             <div class="card">
               <img src="img/projects/3.jpg" class="card-img-top" alt="Project3" />
               <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <p class="card-text">Beberapa project pengembangan atau pengadaan Contact Center yaitu PT.BRI, PT.Visionet, PT.BTPN, PT.BTN, PT.Admedika. Untuk project pengadaan atau pengembangan Pbx Backup Office yaitu PT. Schneider, PT Pertamina 10 Site, PT Tupperware, PT Cemindo ( Semen Merah Putih), PT.Indofood Purwakarta, PT.Taspen Jakarta, Bogor dan Bandung </p>
               </div>
             </div>
           </div>
@@ -143,21 +142,29 @@
         </div>
         <div class="row justify-content-center">          
             <div class="col-md-6">
-              <form>
+              <div class="alert alert-success alert-dismissible fade show d-none my-alert" role="alert">
+                <strong>Terima Kasih!</strong> Pesan anda sudah kami terima.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              <form name="contactform">
                 <div class="mb-3">
                   <label for="name" class="form-label">Nama Lengkap</label>
-                  <input type="text" class="form-control" id="name" aria-describedby="name" />
+                  <input type="text" class="form-control" id="name" aria-describedby="name" name="nama" />
                 </div>
                 <div class="mb-3">
                   <label for="email" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="email" aria-describedby="Email" />
+                  <input type="email" class="form-control" id="email" aria-describedby="email" name="email" />
                 </div>
-                <div class="mb-3">
+                <div c lass="mb-3">
                   <label for="pesan" class="form-label">Pesan</label>
-                  <textarea class="form-control" id="pesan" rows="3"></textarea>
+                  <textarea class="form-control" id="pesan" rows="3" name="pesan"></textarea>
                 </div>
+                <button class="btn btn-primary btn-loading d-none" type="button" disabled>
+                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  Loading...
+                </button>
 
-                <button type="submit" class="btn btn-primary">Kirim</button>
+                <button type="submit" class="btn btn-primary btn-kirim">Kirim</button>
               </form>
             </div>
           </div>
@@ -175,5 +182,33 @@
     </footer>
     <!-- Akhir Footer -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script>
+      const scriptURL = 'https://script.google.com/macros/s/AKfycby22phVnZ-tAar2bgW33vLdRhKppHawNOBGj9b55oJhQCkFf98LI2w4HclJw3b__SX7/exec'
+      const form = document.forms['contactform'];
+      const btnKirim = document.querySelector('.btn-kirim');
+      const btnLoading = document.querySelector('.btn-loading');
+      const myAlert = document.querySelector('.my-alert');
+    
+      form.addEventListener('submit', e => {
+        e.preventDefault()
+        // ketika tombol submit di klik 
+        // tampilkan tombol loading, hilangkan tombol kirim
+        btnLoading.classList.toggle('d-none');
+        btnKirim.classList.toggle('d-none');
+        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+          .then(response => {
+           // tampilkan tombol Kirim, hilangkan tombol Loading 
+            btnLoading.classList.toggle('d-none');
+            btnKirim.classList.toggle('d-none');
+            //tampilkan alert
+            myAlert.classList.toggle('d-none');
+            // reset formnya 
+            form.reset();
+            
+            console.log('Success!', response)})
+          .catch(error => console.error('Error!', error.message))
+      })
+    </script>
+
   </body>
 </html>
